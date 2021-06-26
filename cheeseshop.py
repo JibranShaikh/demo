@@ -16,7 +16,7 @@ hostname = socket.gethostname()
 hostip = socket.gethostbyname(hostname)
 namespace = None
   
-@APP.route('/v1/status', methods=['GET'])
+@APP.route('/', methods=['GET'])
 def get_status():
     '''
     Gets the status and health of the Cheeseshop service.
