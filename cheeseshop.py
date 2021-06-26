@@ -38,22 +38,3 @@ def get_status():
     return APP.response_class(response=json.dumps({'msg': response_message}),
                               status=STATUS_OK,
                               mimetype='application/json')
-  
-def setup_logging():
-    wlog = logging.getLogger('werkzeug')
-    wlog.disabled = True
-    APP.logger.handlers = []
-    APP.logger.addHandler(logging.StreamHandler())
-    APP.logger.setLevel(logging.DEBUG)
- 
-def _main():
-    setup_logging()
- 
-    # Note that for host portion, use of localhost, 127.0.0.1 or leaving it unspecified will
-    # likely result in your container not only being unable to respond to health checks
-    # but also inhibit traffic flow from Kuberentes Services networking layer into the container.
-    APP.logger.info("cheeseshop pod is using address {}:8080 for server socket binding".format(hostip))
-    APP.run(host=hostip, port=8080)
-  
-if __name__ == '__main__':
-    _main()
